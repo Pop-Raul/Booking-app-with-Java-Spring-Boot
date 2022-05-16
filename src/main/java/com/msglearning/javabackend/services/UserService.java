@@ -26,7 +26,7 @@ public class UserService {
         if (!validatePhone(user.getPhone()))
             System.out.println("Not a valid phone number");
         //validate email
-        if (!validateEmail(user.getPhone()))
+        if (!validateEmail(user.getEmail()))
             System.out.println("Not a valid email");
         //check firstname NotNull or empty
         if (isNullOrBlank(user.getFirstName()))

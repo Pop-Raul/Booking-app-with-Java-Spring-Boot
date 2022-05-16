@@ -116,5 +116,16 @@ public class UserService {
         return param == null || param.trim().length() == 0;
     }
 
+    private boolean validateEmail(String email) {
+
+        if(email.equals(null)) return false;
+
+        Pattern pattern = Pattern.compile("^[^\\W_A-Z0-9] [^\\WA-Z] + [^\\W_A-Z] +@ [^\\W_A-Z0-9] + [.] [a-z]{2,6}$");
+        Matcher matcher = pattern.matcher(email);
+        boolean matchFound = matcher.find();
+
+        return matchFound;
+    }
+
 
 }

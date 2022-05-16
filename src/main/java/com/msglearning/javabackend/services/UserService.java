@@ -39,8 +39,9 @@ public class UserService {
             System.out.println("Password is empty!");
 
         //Hash password
+        PasswordService.hashPassword(user.getPassword());
         //user.setPassword(user.getPassword().);
-
+        user.setPassword(PasswordService.hashPassword(user.getPassword()));
         return userRepository.save(user);
     }
 

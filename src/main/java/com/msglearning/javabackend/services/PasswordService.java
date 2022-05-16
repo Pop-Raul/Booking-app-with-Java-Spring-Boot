@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 @Service
 public class PasswordService {
 
-    public static void hasPassword(String password){
+    public static String hashPassword(String password){
         password.trim();
         try {
             MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
@@ -21,9 +21,12 @@ public class PasswordService {
                 sb.append(Integer.toString((passHash[i] & 0xff) + 0x100, 16).substring(1));
             }
             String generatedPassword = sb.toString();
-            System.out.println(generatedPassword);
+
+            return generatedPassword;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
+            System.out.println("Not such algorithm exception");
+            return null;
         }
     }
 }

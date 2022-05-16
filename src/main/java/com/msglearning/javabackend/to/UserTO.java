@@ -3,7 +3,6 @@ package com.msglearning.javabackend.to;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Data
@@ -22,6 +21,8 @@ public class UserTO implements Serializable {
 
     private String password;
 
+
+    // Setters
     public void setId(Long id) {
         this.id = id;
     }

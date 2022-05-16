@@ -7,10 +7,8 @@ import com.msglearning.javabackend.to.UserTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLOutput;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,7 +26,8 @@ public class UserService {
         if (!validatePhone(user.getPhone()))
             System.out.println("Not a valid phone number");
         //validate email
-
+        if (!validateEmail(user.getPhone()))
+            System.out.println("Not a valid email");
         //check firstname NotNull or empty
         if (isNullOrBlank(user.getFirstName()))
             System.out.println("Invalid first name!");

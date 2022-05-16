@@ -29,7 +29,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
     @Autowired
     private Environment env;
 
@@ -68,25 +67,12 @@ public class UserController {
         return imageService.read(profileImageStoragePlace +"\\"+imageNameOpt.get());
     }
 
-    @GetMapping("/gmail")
-    public /*List<UserTO>*/String getHello()
-    {
-        List<User> gmailUsers=userService.getGmailUsers();
-        List<UserTO> toReturn = null;
-
-        toReturn = gmailUsers.stream().map(UserConverter::convertToTO).collect(Collectors.toList());
-
-        return "ASDASD";
-        //return toReturn;
-    }
-
     @PostMapping("/registerNewUser")
     public boolean registerNewUserPost(@RequestBody UserTO userto){
         // calls the save of the userService
         // convert userTO to user
 
         User user=UserConverter.convertToUser(userto);
-
 
         try {
             userService.save(user);
@@ -98,19 +84,5 @@ public class UserController {
             return false;
         }
 
-    }
-
-    @PostMapping("/mytest")
-    public String mytest(@RequestBody UserTO userto)
-    {
-        try{
-            User user=UserConverter.convertToUser(userto);
-            return user.getClass().getName();
-        }
-        catch (Exception e)
-        {
-            return "Bunko vagy bugsy";
-            //return e.getMessage();
-        }
     }
 }

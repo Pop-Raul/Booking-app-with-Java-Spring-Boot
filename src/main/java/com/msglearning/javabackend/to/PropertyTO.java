@@ -8,6 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class PropertyTO {
 
+    //comm
     private int id;
 
     private String name;

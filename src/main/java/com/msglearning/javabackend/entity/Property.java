@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Property {
 
-
+// comm
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

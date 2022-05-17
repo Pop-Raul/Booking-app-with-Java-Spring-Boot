@@ -90,10 +90,7 @@ public class UserService {
     {
         Pattern pattern = Pattern.compile("^(\\+4)?07[0-9]{8}$", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(phoneNumber);
-        boolean matchFound = matcher.find();
-        if(matchFound)
-            return true;
-        return false;
+        return matcher.find();
     }
 
     private static boolean isNullOrBlank(String param) {
@@ -102,13 +99,12 @@ public class UserService {
 
     private boolean validateEmail(String email) {
 
-        if(email.equals(null)) return false;
+        if (isNullOrBlank(email)) return false;
 
-        Pattern pattern = Pattern.compile("^[^\\W_A-Z0-9] [^\\WA-Z] + [^\\W_A-Z] +@ [^\\W_A-Z0-9] + [.] [a-z]{2,6}$");
+        Pattern pattern = Pattern.compile("^[\\w!#$%&’*+\\=?`{|}~^-]+(?:\\.[\\w!#$%&’*+\\=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
         Matcher matcher = pattern.matcher(email);
-        boolean matchFound = matcher.find();
 
-        return matchFound;
+        return matcher.find();
     }
 
 

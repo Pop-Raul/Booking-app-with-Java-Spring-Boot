@@ -20,8 +20,7 @@ public class PasswordService {
             for (int i = 0; i < passHash.length; i++) {
                 sb.append(Integer.toString((passHash[i] & 0xff) + 0x100, 16).substring(1));
             }
-            String generatedPassword = sb.toString();
-            return generatedPassword;
+            return sb.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             System.out.println("No such algorithm exception");

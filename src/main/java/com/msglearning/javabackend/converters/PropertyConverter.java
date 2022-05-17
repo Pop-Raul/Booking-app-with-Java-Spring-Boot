@@ -9,7 +9,7 @@ public class PropertyConverter {
                     property.getMp3(), property.getRooms(), property.getPeople_capacity(), property.getDescription());
     }
 
-    public static final Property convertToTo ( PropertyTO propertyTO) {
+    public static final Property convertToProperty ( PropertyTO propertyTO) {
         return new Property(propertyTO.getId(), propertyTO.getName(), propertyTO.getAddress(),
                 propertyTO.getMp3(), propertyTO.getRooms(), propertyTO.getPeople_capacity(), propertyTO.getDescription());
     }

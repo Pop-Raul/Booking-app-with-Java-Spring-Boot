@@ -22,28 +22,4 @@ public class UserTO implements Serializable {
     private String password;
 
 
-    // Setters
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

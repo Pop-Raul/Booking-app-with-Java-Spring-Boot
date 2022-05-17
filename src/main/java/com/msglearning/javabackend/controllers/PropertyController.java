@@ -28,15 +28,15 @@ public class PropertyController {
             return propertyService.findAll();
         }
 
-    @GetMapping(ID_PATH)
-    public Optional<Property> getById(@PathVariable Long id) {
-        return propertyService.findById(id);
-    }
+        @GetMapping(ID_PATH)
+        public Optional<Property> getById(@PathVariable Long id) {
+            return propertyService.findById(id);
+        }
 
-    @GetMapping(NAME_PATH)
-    public List<PropertyTO> getByName(@PathVariable String name) {
-        return propertyService.findByName(name);
-    }
+        @GetMapping(NAME_PATH)
+        public List<PropertyTO> getByName(@PathVariable String name) {
+            return propertyService.findByName(name);
+        }
 
 
 }

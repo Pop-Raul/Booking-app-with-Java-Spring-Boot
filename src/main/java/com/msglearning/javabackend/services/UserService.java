@@ -57,7 +57,7 @@ public class UserService {
         }
 
         //Hash password
-        user.setPassword(PasswordService.hashPassword(user.getPassword()));
+        //user.setPassword(user.getPassword().);
 
         return userRepository.save(user);
     }
@@ -102,6 +102,21 @@ public class UserService {
                 .filter(user -> user.getEmail().endsWith("gmail.com"))
                 .collect(Collectors.toList());
     }
+
+    /*public Map<String, List<User>> groupByOccupation()
+    {
+        List<User> allUsers = userRepository.findAll();
+        return allUsers.stream()
+                .collect(Collectors.groupingBy(User::getOccupation));
+    }
+
+    public List<String> getNameWithOccupation()
+    {
+        List<User> allUsers=userRepository.findAll();
+
+        return allUsers.stream().map(user -> { return user.getFirstName() + " " + user.getLastName() + " - " + user.getOccupation();}).
+                collect(Collectors.toList());
+    }*/
 
     //Helper method
     private boolean validatePhone(String phoneNumber)

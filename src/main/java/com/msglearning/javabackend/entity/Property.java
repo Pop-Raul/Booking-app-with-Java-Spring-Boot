@@ -12,7 +12,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Property {
 
-// comm
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,13 +23,16 @@ public class Property {
     private String address;
 
     @Column (nullable = false)
+    private double price;
+
+    @Column (nullable = false)
     private int people_capacity;
 
     @Column (nullable = false)
     private int rooms;
 
     @Column (nullable = false)
-    private int mp3;
+    private int sm3;
 
     @Column
     private String description;

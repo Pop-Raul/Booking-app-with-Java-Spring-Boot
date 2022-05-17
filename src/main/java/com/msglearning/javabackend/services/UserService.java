@@ -24,19 +24,37 @@ public class UserService {
 
         //validate Phone
         if (!validatePhone(user.getPhone()))
+        {
             System.out.println("Not a valid phone number");
+            return null;
+        }
+
         //validate email
         if (!validateEmail(user.getEmail()))
+        {
             System.out.println("Not a valid email");
+            return null;
+        }
+
         //check firstname NotNull or empty
         if (isNullOrBlank(user.getFirstName()))
+        {
             System.out.println("Invalid first name!");
+            return null;
+        }
+
         //check lastName NotNull or empty
         if (isNullOrBlank(user.getLastName()))
+        {
             System.out.println("Invalid last name!");
+            return null;
+        }
 
         if (isNullOrBlank(user.getPassword()))
+        {
             System.out.println("Password is empty!");
+            return null;
+        }
 
         //Hash password
         user.setPassword(PasswordService.hashPassword(user.getPassword()));

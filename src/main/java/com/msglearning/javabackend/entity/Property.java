@@ -32,10 +32,13 @@ public class Property {
     private int rooms;
 
     @Column (nullable = false)
-    private int sm3;
+    private int Mp3;
 
     @Column
     private String description;
 
     public Property() {}
+
+    public Property(Long id, String name, String address, int mp3, int rooms, int people_capacity, String description) {
+    }
 }

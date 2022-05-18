@@ -9,4 +9,9 @@ public class BookingConverter {
     public static final BookingTO convertToTO (Booking entity){
         return new BookingTO(entity.getId(), entity.getProperty(), entity.getUser(),entity.getStart_date(),entity.getEnd_date());
     }
+
+    public static final Booking convertToBooking (BookingTO entity)
+    {
+        return new Booking(entity.getId(), entity.getProperty(), entity.getUser(), entity.getStart_date(), entity.getEnd_date());
+    }
 }

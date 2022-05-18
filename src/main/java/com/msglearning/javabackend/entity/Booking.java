@@ -18,10 +18,12 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column (nullable = false)
+    //@Column (nullable = false)
+    @ManyToOne
     private Property property;
 
-    @Column (nullable = false)
+    //@Column (nullable = false)
+    @ManyToOne
     private User user;
 
     @Column(nullable = false)

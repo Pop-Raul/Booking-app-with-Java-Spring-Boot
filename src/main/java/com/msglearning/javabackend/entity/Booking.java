@@ -8,9 +8,11 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@Table(name = "booking")
+@Table(name = Booking.TABLE_NAME)
 @AllArgsConstructor
 public class Booking {
+
+    static final String TABLE_NAME = "booking";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,10 +7,12 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Data
-@Table(name = "property")
+@Table(name = Property.TABLE_NAME)
 @Entity
 @AllArgsConstructor
 public class Property {
+
+    static final String TABLE_NAME = "property";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

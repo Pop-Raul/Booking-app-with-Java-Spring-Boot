@@ -17,6 +17,9 @@ public interface PropertyRepository extends CrudRepository <Property,Long> {
     @Query("SELECT u FROM Property u WHERE u.name LIKE %:token%")
     List<Property> findByName(@Param("token") String token);
 
+//    @Query("Select u FROM Property u WHERE u.price < ")
+//    List<Property>
+
     Optional<Property> findById(Long id);
 
 }

@@ -67,7 +67,7 @@ public class UserController {
         return imageService.read(profileImageStoragePlace +"\\"+imageNameOpt.get());
     }
 
-    @PostMapping("/registerNewUser")
+    /*@PostMapping("/registerNewUser")
     public boolean registerNewUserPost(@RequestBody UserTO userto){
         // calls the save of the userService
         // convert userTO to user
@@ -84,5 +84,5 @@ public class UserController {
             return false;
         }
 
-    }
+    }*/
 }

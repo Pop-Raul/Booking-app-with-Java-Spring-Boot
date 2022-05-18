@@ -39,6 +39,7 @@ public class Property {
     @Column
     private String description;
 
+    //public ArrayList<String> pictures;
     public Property() {}
 
     public Property(Long id, String name, String address, int mp3, int rooms, int people_capacity, String description) {

@@ -20,7 +20,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User save(User user) {
+    /*public User save(User user) {
 
         //validate Phone
         if (!validatePhone(user.getPhone()))
@@ -60,6 +60,47 @@ public class UserService {
         //user.setPassword(user.getPassword().);
 
         return userRepository.save(user);
+    }*/
+
+    public User save(UserTO userTO) throws Exception {
+
+        //validate Phone
+        if (!validatePhone(userTO.getPhone()))
+        {
+            System.out.println("Not a valid phone number");
+            return null;
+        }
+
+        //validate email
+        if (!validateEmail(userTO.getEmail()))
+        {
+            System.out.println("Not a valid email");
+            return null;
+        }
+
+        //check firstname NotNull or empty
+        if (isNullOrBlank(userTO.getFirstName()))
+        {
+            System.out.println("Invalid first name!");
+            return null;
+        }
+
+        //check lastName NotNull or empty
+        if (isNullOrBlank(userTO.getLastName()))
+        {
+            System.out.println("Invalid last name!");
+            return null;
+        }
+
+        if (isNullOrBlank(userTO.getPassword()))
+        {
+            System.out.println("Password is empty!");
+            return null;
+        }
+
+        userTO.setPassword(PasswordService.getSaltedHash(userTO.getPassword()));
+
+        return userRepository.save(UserConverter.convertToUser(userTO));
     }
 
     public List<UserTO> findAll() {

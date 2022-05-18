@@ -31,7 +31,7 @@ public class BookingService {
 
     }
 
-    public List<BookingTO> findByName(String name){
+   /* public List<BookingTO> findByName(String name){
          List<Booking> bookings = bookingRepository.findByName(name);
          if(bookings.isEmpty())
              return Collections.emptyList();
@@ -39,7 +39,7 @@ public class BookingService {
              return bookings.stream()
                      .map(BookingConverter::convertToTO)
                      .collect(Collectors.toList());
-    }
+    }*/
 
     public Optional<Booking> findById(Long id){
          return bookingRepository.findById(id);

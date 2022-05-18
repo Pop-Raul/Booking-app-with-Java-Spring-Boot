@@ -28,11 +28,6 @@ public class BookingController {
         return bookingService.findAll();
     }
 
-    @GetMapping(NAME_PATH)
-    public List<BookingTO> getByName(@PathVariable String name){
-        return bookingService.findByName(name);
-    }
-
     @GetMapping(ID_PATH)
     public Optional<Booking> getById(@PathVariable Long id){
         return bookingService.findById(id);

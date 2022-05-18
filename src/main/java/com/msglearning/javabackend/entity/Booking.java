@@ -26,6 +26,7 @@ public class Booking {
     @ManyToOne
     private User user;
 
+
     @Column(nullable = false)
     private LocalDate start_date;
 

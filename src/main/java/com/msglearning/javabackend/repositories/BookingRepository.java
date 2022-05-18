@@ -15,6 +15,6 @@ public interface BookingRepository extends CrudRepository <Booking, Long> {
 
      Optional<Booking> findById(Long id);
 
-     List<Booking> findByName(String name);
+     //List<Booking> findByName(String name);
 
 }

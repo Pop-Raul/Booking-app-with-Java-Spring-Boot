@@ -2,6 +2,7 @@ package com.msglearning.javabackend.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 @Data
 @Table(name = Booking.TABLE_NAME)
 @AllArgsConstructor
+@NoArgsConstructor
 public class Booking {
 
     static final String TABLE_NAME = "booking";
@@ -18,14 +20,11 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    //@Column (nullable = false)
     @ManyToOne
     private Property property;
 
-    //@Column (nullable = false)
     @ManyToOne
     private User user;
-
 
     @Column(nullable = false)
     private LocalDate start_date;
@@ -33,5 +32,4 @@ public class Booking {
     @Column(nullable = false)
     private LocalDate end_date;
 
-    public Booking(){}
 }

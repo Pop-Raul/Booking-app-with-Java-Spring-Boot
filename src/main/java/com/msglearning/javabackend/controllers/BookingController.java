@@ -1,13 +1,12 @@
 package com.msglearning.javabackend.controllers;
 import com.msglearning.javabackend.entity.Booking;
+import com.msglearning.javabackend.entity.Property;
 import com.msglearning.javabackend.services.BookingService;
 import com.msglearning.javabackend.to.BookingTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +17,7 @@ public class BookingController {
     private static final String ALL_PATH = "/all" ;
     private static final String ID_PATH = "/id/{id}" ;
     private static final String NAME_PATH = "/name/{name}";
+
 
 
     @Autowired
@@ -32,8 +32,5 @@ public class BookingController {
     public Optional<Booking> getById(@PathVariable Long id){
         return bookingService.findById(id);
     }
-
-
-
 
 }

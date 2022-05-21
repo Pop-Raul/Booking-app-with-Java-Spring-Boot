@@ -3,6 +3,7 @@ package com.msglearning.javabackend.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name = Property.TABLE_NAME)
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class Property {
 
     static final String TABLE_NAME = "property";
@@ -31,17 +33,12 @@ public class Property {
     private int people_capacity;
 
     @Column (nullable = false)
-    private int rooms;
+    private int room;
 
     @Column (nullable = false)
-    private int Mp3;
+    private int mp2;
 
     @Column
     private String description;
 
-    //public ArrayList<String> pictures;
-    public Property() {}
-
-    public Property(Long id, String name, String address, int mp3, int rooms, int people_capacity, String description) {
-    }
 }

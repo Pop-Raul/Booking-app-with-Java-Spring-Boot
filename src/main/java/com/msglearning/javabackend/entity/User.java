@@ -2,6 +2,7 @@ package com.msglearning.javabackend.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = User.TABLE_NAME)
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     static final String TABLE_NAME = "user";
@@ -35,5 +37,4 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    public User() {}
 }

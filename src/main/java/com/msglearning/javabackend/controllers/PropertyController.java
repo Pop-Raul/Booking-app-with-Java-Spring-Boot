@@ -4,39 +4,60 @@ import com.msglearning.javabackend.entity.Property;
 import com.msglearning.javabackend.services.PropertyService;
 import com.msglearning.javabackend.to.PropertyTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping({ ControllerConstants.API_PATH_PROPERTY })
+@RequestMapping({ControllerConstants.API_PATH_PROPERTY})
 public class PropertyController {
 
     private static final String ALL_PATH = "/all";
     private static final String ID_PATH = "/id/{id}";
     private static final String NAME_PATH = "/name/{name}";
+    private static final String PRICE_RANGE_PATH = "/price";
+    private static final String AREA_RANGE_PATH = "/area";
+    private static final String ROOM_PATH = "/room/{room}";
 
-        @Autowired
-        PropertyService propertyService;
 
-        @GetMapping(ALL_PATH)
-        public List<PropertyTO> getAll() {
-            return propertyService.findAll();
-        }
 
-        @GetMapping(ID_PATH)
-        public Optional<Property> getById(@PathVariable Long id) {
-            return propertyService.findById(id);
-        }
 
-        @GetMapping(NAME_PATH)
-        public List<PropertyTO> getByName(@PathVariable String name) {
-            return propertyService.findByName(name);
-        }
+    @Autowired
+    PropertyService propertyService;
 
+    @GetMapping(ALL_PATH)
+    public List<PropertyTO> getAll() {
+        return propertyService.findAll();
+    }
+
+    @GetMapping(ID_PATH)
+    public Optional<Property> getById(@PathVariable Long id) {
+        return propertyService.findById(id);
+    }
+
+    @GetMapping(NAME_PATH)
+    public List<PropertyTO> getByName(@PathVariable String name) {
+        return propertyService.findByName(name);
+    }
+
+    @GetMapping(PRICE_RANGE_PATH)
+    public List<PropertyTO> getByPriceRange(@RequestParam double minPrice, @RequestParam double maxPrice) {
+        //http://localhost:8080/java-api/api/booking/price?minPrice=54&maxPrice=345
+        return propertyService.getByPriceRange(minPrice,maxPrice);
+    }
+
+    @GetMapping(ROOM_PATH)
+    public List<PropertyTO> findByNrOfRooms(@PathVariable int room) {
+        //http://localhost:8080/java-api/api/booking/room/2
+        return propertyService.findByNrOfRooms(room);
+    }
+
+    @GetMapping(AREA_RANGE_PATH)
+    public List<PropertyTO> findByArea(@RequestParam int minArea, @RequestParam int maxArea) {
+        //http://localhost:8080/java-api/api/booking/area?minArea=1&maxArea=4
+        return propertyService.findByArea(minArea,maxArea);
+    }
 
 }

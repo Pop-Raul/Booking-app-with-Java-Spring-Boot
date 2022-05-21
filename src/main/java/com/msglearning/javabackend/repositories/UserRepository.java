@@ -24,4 +24,5 @@ public interface UserRepository extends CrudRepository <User, Long > {
     @Query("SELECT u.profileImage FROM User u WHERE u.id = :id")
     Optional<String> findProfileImageById(@Param("id") Long id);
 
+
 }

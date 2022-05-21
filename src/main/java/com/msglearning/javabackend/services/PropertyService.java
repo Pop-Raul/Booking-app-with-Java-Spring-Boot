@@ -7,6 +7,7 @@ import com.msglearning.javabackend.repositories.PropertyRepository;
 import com.msglearning.javabackend.to.PropertyTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
 import java.util.List;
@@ -35,12 +36,12 @@ public class PropertyService {
             return null;
         }
 
-        if(property.getRooms() == 0){
+        if(property.getRoom() == 0){
             System.out.println("Invalid Room");
             return null;
         }
 
-        if(property.getMp3() == 0){
+        if(property.getMp2() == 0){
             System.out.println("Invalid Area");
             return null;
         }
@@ -50,12 +51,7 @@ public class PropertyService {
 
     public List<PropertyTO> findAll() {
         List<Property> property = propertyRepository.findAll();
-        if (property.isEmpty())
-            return Collections.emptyList();
-        else
-            return property.stream()
-                    .map(PropertyConverter::convertToTo)
-                    .collect(Collectors.toList());
+        return convertPropertyList(property);
     }
 
     public Optional<Property> findById(Long id) {
@@ -64,6 +60,25 @@ public class PropertyService {
 
     public List<PropertyTO> findByName(String token) {
         List<Property> properties = propertyRepository.findByName(token);
+        return convertPropertyList(properties);
+    }
+
+    public List<PropertyTO> getByPriceRange( double minPrice, double maxPrice) {
+        List<Property> properties = propertyRepository.findByPriceRange(minPrice,maxPrice);
+        return convertPropertyList(properties);
+    }
+
+    public List<PropertyTO> findByNrOfRooms( int room) {
+        List<Property> properties = propertyRepository.findByNrOfRooms(room);
+        return convertPropertyList(properties);
+    }
+
+    public List<PropertyTO> findByArea( int minArea, int maxArea) {
+        List<Property> properties = propertyRepository.findByArea(minArea,maxArea);
+        return convertPropertyList(properties);
+    }
+
+    private List<PropertyTO> convertPropertyList(List<Property> properties) {
         if (properties.isEmpty())
             return Collections.emptyList();
         else

@@ -6,7 +6,6 @@ import com.msglearning.javabackend.to.PropertyTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +19,9 @@ public class PropertyController {
     private static final String PRICE_RANGE_PATH = "/price";
     private static final String AREA_RANGE_PATH = "/area";
     private static final String ROOM_PATH = "/room/{room}";
+    private static final String ASCENDING_PRICE_PATH = "/price-up";
+    private static final String DESCENDING_PRICE_PATH = "/price-down";
+
 
 
 
@@ -42,6 +44,24 @@ public class PropertyController {
         return propertyService.findByName(name);
     }
 
+
+    // SORT
+    @GetMapping(ASCENDING_PRICE_PATH)
+    public List<PropertyTO> getAscendingPrince(){
+        return propertyService.filterAscendingPrice();
+    }
+
+    @GetMapping(DESCENDING_PRICE_PATH)
+    public List<PropertyTO> getDescendingPrince(){
+        return propertyService.filterDescendingPrice();
+    }
+
+    public List<PropertyTO> getRoomsWithCapacityOf(@PathVariable int capacity){
+        return propertyService.roomCapacity(capacity);
+    }
+
+
+    // FILTER
     @GetMapping(PRICE_RANGE_PATH)
     public List<PropertyTO> getByPriceRange(@RequestParam double minPrice, @RequestParam double maxPrice) {
         //http://localhost:8080/java-api/api/booking/price?minPrice=54&maxPrice=345

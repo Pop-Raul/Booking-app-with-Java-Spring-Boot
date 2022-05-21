@@ -31,5 +31,7 @@ public interface PropertyRepository extends CrudRepository<Property, Long> {
     @Query("select p from Property p WHERE p.mp2 >= :minArea  AND p.mp2 <= :maxArea")
     List<Property> findByArea(int minArea, int maxArea);
 
+    @Query("SELECT p.profileImage FROM Property p WHERE p.id = :id")
+    Optional<String> findPropertyImagesById(@Param("id") Long id);
 
 }

@@ -7,9 +7,9 @@ import com.msglearning.javabackend.repositories.PropertyRepository;
 import com.msglearning.javabackend.to.PropertyTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -85,6 +85,56 @@ public class PropertyService {
             return properties.stream()
                     .map(PropertyConverter::convertToTo)
                     .collect(Collectors.toList());
+    }
+
+    // SORT
+
+    // PRICE - LOW -> HIGH
+    public List<PropertyTO> filterAscendingPrice(){
+        List<Property> properties = propertyRepository.findAll();
+
+        if(properties.isEmpty()) return Collections.emptyList();
+
+            return properties.stream()
+                    .sorted(Comparator.comparingDouble(Property::getPrice))
+                    .map(PropertyConverter::convertToTo)
+                    .collect(Collectors.toList());
+    }
+
+    // PRICE - HIGH -> LOW
+    public List<PropertyTO> filterDescendingPrice(){
+        List<Property> properties = propertyRepository.findAll();
+
+        if(properties.isEmpty()) return Collections.emptyList();
+
+            return properties.stream()
+                    .sorted(Comparator.comparingDouble(Property::getPrice).reversed())
+                    .map(PropertyConverter::convertToTo)
+                    .collect(Collectors.toList());
+    }
+
+    // ROOM CAPACITY
+    public List<PropertyTO> roomCapacity (int capacity){
+
+        if (capacity <=0) return Collections.emptyList();
+
+        List<Property> properties = propertyRepository.findAll();
+
+        if(properties.isEmpty()) return Collections.emptyList();
+
+        return properties.stream()
+                .filter(property -> property.getPeople_capacity() == capacity)
+                .map(PropertyConverter::convertToTo)
+                .collect(Collectors.toList());
+    }
+
+
+    public Optional<String> findImagesById(Long id){
+//        Optional<String> propertyImages = propertyRepository.findPropertyImagesById(id);
+//        return propertyImages;
+
+        return propertyRepository.findPropertyImagesById(id);
+
     }
 
 

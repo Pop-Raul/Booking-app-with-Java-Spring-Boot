@@ -3,7 +3,6 @@ package com.msglearning.javabackend.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -11,7 +10,6 @@ import javax.persistence.*;
 @Table(name = Property.TABLE_NAME)
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 public class Property {
 
     static final String TABLE_NAME = "property";
@@ -40,5 +38,7 @@ public class Property {
 
     @Column
     private String description;
+
+    public Property (){};
 
 }

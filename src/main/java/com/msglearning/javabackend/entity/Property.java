@@ -39,6 +39,9 @@ public class Property {
     @Column
     private String description;
 
+    @Column
+    private String picture;
+
     public Property (){};
 
 }

@@ -14,11 +14,12 @@ public class PropertyConverter {
                 .rooms(property.getRoom())
                 .mp2(property.getMp2())
                 .description(property.getDescription())
+                .picture(property.getPicture())
                 .build();
     }
 
     public static final Property convertToProperty(PropertyTO propertyTO) {
-        return new Property(propertyTO.getId(), propertyTO.getName(), propertyTO.getAddress(), propertyTO.getPrice(), propertyTO.getPeople_capacity(), propertyTO.getRooms(), propertyTO.getMp2(), propertyTO.getDescription());
+        return new Property(propertyTO.getId(), propertyTO.getName(), propertyTO.getAddress(), propertyTO.getPrice(), propertyTO.getPeople_capacity(), propertyTO.getRooms(), propertyTO.getMp2(), propertyTO.getDescription(), propertyTO.getPicture());
     }
 
 

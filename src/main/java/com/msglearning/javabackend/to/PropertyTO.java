@@ -26,4 +26,6 @@ public class PropertyTO {
 
     private String description;
 
+    private String picture;
+
 }

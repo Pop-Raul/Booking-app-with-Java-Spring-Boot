@@ -20,28 +20,28 @@ public class PropertyService {
     @Autowired
     PropertyRepository propertyRepository;
 
-    public Property saveProperty (Property property) {
-            if(StringHelper.isNullOrBlank(property.getName())){
-                System.out.println("Invalid Property");
-                return null;
-            }
+    public Property saveProperty(Property property) {
+        if (StringHelper.isNullOrBlank(property.getName())) {
+            System.out.println("Invalid Property");
+            return null;
+        }
 
-        if(StringHelper.isNullOrBlank(property.getAddress())){
+        if (StringHelper.isNullOrBlank(property.getAddress())) {
             System.out.println("Invalid address");
             return null;
         }
 
-        if (property.getPeople_capacity() == 0){
+        if (property.getPeople_capacity() == 0) {
             System.out.println("Invalid people capacity");
             return null;
         }
 
-        if(property.getRoom() == 0){
+        if (property.getRoom() == 0) {
             System.out.println("Invalid Room");
             return null;
         }
 
-        if(property.getMp2() == 0){
+        if (property.getMp2() == 0) {
             System.out.println("Invalid Area");
             return null;
         }
@@ -63,18 +63,18 @@ public class PropertyService {
         return convertPropertyList(properties);
     }
 
-    public List<PropertyTO> getByPriceRange( double minPrice, double maxPrice) {
-        List<Property> properties = propertyRepository.findByPriceRange(minPrice,maxPrice);
+    public List<PropertyTO> getByPriceRange(double minPrice, double maxPrice) {
+        List<Property> properties = propertyRepository.findByPriceRange(minPrice, maxPrice);
         return convertPropertyList(properties);
     }
 
-    public List<PropertyTO> findByNrOfRooms( int room) {
+    public List<PropertyTO> findByNrOfRooms(int room) {
         List<Property> properties = propertyRepository.findByNrOfRooms(room);
         return convertPropertyList(properties);
     }
 
-    public List<PropertyTO> findByArea( int minArea, int maxArea) {
-        List<Property> properties = propertyRepository.findByArea(minArea,maxArea);
+    public List<PropertyTO> findByArea(int minArea, int maxArea) {
+        List<Property> properties = propertyRepository.findByArea(minArea, maxArea);
         return convertPropertyList(properties);
     }
 
@@ -90,37 +90,37 @@ public class PropertyService {
     // SORT
 
     // PRICE - LOW -> HIGH
-    public List<PropertyTO> filterAscendingPrice(){
+    public List<PropertyTO> filterAscendingPrice() {
         List<Property> properties = propertyRepository.findAll();
 
-        if(properties.isEmpty()) return Collections.emptyList();
+        if (properties.isEmpty()) return Collections.emptyList();
 
-            return properties.stream()
-                    .sorted(Comparator.comparingDouble(Property::getPrice))
-                    .map(PropertyConverter::convertToTo)
-                    .collect(Collectors.toList());
+        return properties.stream()
+                .sorted(Comparator.comparingDouble(Property::getPrice))
+                .map(PropertyConverter::convertToTo)
+                .collect(Collectors.toList());
     }
 
     // PRICE - HIGH -> LOW
-    public List<PropertyTO> filterDescendingPrice(){
+    public List<PropertyTO> filterDescendingPrice() {
         List<Property> properties = propertyRepository.findAll();
 
-        if(properties.isEmpty()) return Collections.emptyList();
+        if (properties.isEmpty()) return Collections.emptyList();
 
-            return properties.stream()
-                    .sorted(Comparator.comparingDouble(Property::getPrice).reversed())
-                    .map(PropertyConverter::convertToTo)
-                    .collect(Collectors.toList());
+        return properties.stream()
+                .sorted(Comparator.comparingDouble(Property::getPrice).reversed())
+                .map(PropertyConverter::convertToTo)
+                .collect(Collectors.toList());
     }
 
     // ROOM CAPACITY
-    public List<PropertyTO> roomCapacity (int capacity){
+    public List<PropertyTO> roomCapacity(int capacity) {
 
-        if (capacity <=0) return Collections.emptyList();
+        if (capacity <= 0) return Collections.emptyList();
 
         List<Property> properties = propertyRepository.findAll();
 
-        if(properties.isEmpty()) return Collections.emptyList();
+        if (properties.isEmpty()) return Collections.emptyList();
 
         return properties.stream()
                 .filter(property -> property.getPeople_capacity() == capacity)
@@ -129,12 +129,8 @@ public class PropertyService {
     }
 
 
-    public Optional<String> findImagesById(Long id){
-//        Optional<String> propertyImages = propertyRepository.findPropertyImagesById(id);
-//        return propertyImages;
-
-        return propertyRepository.findPropertyImagesById(id);
-
+    public Optional<String> findPictureById(Long id) {
+        return propertyRepository.findPropertyPictureById(id);
     }
 
 

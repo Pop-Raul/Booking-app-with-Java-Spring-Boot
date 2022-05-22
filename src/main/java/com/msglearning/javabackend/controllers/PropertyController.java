@@ -1,11 +1,15 @@
 package com.msglearning.javabackend.controllers;
 
 import com.msglearning.javabackend.entity.Property;
+import com.msglearning.javabackend.services.ImageService;
 import com.msglearning.javabackend.services.PropertyService;
 import com.msglearning.javabackend.to.PropertyTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,10 +25,13 @@ public class PropertyController {
     private static final String ROOM_PATH = "/room/{room}";
     private static final String ASCENDING_PRICE_PATH = "/price-up";
     private static final String DESCENDING_PRICE_PATH = "/price-down";
+    private static final String IMAGE_PATH = "/image/{id}";
 
+    @Autowired
+    private ImageService imageService;
 
-
-
+    @Autowired
+    private Environment env;
 
     @Autowired
     PropertyService propertyService;
@@ -78,6 +85,17 @@ public class PropertyController {
     public List<PropertyTO> findByArea(@RequestParam int minArea, @RequestParam int maxArea) {
         //http://localhost:8080/java-api/api/booking/area?minArea=1&maxArea=4
         return propertyService.findByArea(minArea,maxArea);
+    }
+
+    @GetMapping(value = IMAGE_PATH, produces = MediaType.IMAGE_JPEG_VALUE)
+    public @ResponseBody
+    byte[] getPropertyPicture(@PathVariable Long id) throws IOException {
+        Optional<String> imageNameOpt= propertyService.findPictureById(id);
+        if (imageNameOpt.isEmpty()) {
+            return new byte[0];
+        }
+        String profileImageStoragePlace = env.getProperty("location");
+        return imageService.read(profileImageStoragePlace + imageNameOpt.get());
     }
 
 }

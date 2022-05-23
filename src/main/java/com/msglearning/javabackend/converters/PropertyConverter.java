@@ -11,7 +11,7 @@ public class PropertyConverter {
                 .price(property.getPrice())
                 .address(property.getAddress())
                 .people_capacity(property.getPeople_capacity())
-                .rooms(property.getRoom())
+                .room(property.getRoom())
                 .mp2(property.getMp2())
                 .description(property.getDescription())
                 .picture(property.getPicture())
@@ -19,7 +19,7 @@ public class PropertyConverter {
     }
 
     public static final Property convertToProperty(PropertyTO propertyTO) {
-        return new Property(propertyTO.getId(), propertyTO.getName(), propertyTO.getAddress(), propertyTO.getPrice(), propertyTO.getPeople_capacity(), propertyTO.getRooms(), propertyTO.getMp2(), propertyTO.getDescription(), propertyTO.getPicture());
+        return new Property(propertyTO.getId(), propertyTO.getName(), propertyTO.getAddress(), propertyTO.getPrice(), propertyTO.getPeople_capacity(), propertyTO.getRoom(), propertyTO.getMp2(), propertyTO.getDescription(), propertyTO.getPicture());
     }
 
 

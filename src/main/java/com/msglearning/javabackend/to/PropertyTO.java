@@ -20,7 +20,7 @@ public class PropertyTO {
 
     private int people_capacity;
 
-    private int rooms;
+    private int room;
 
     private int mp2;
 

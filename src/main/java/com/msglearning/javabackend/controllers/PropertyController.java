@@ -36,6 +36,7 @@ public class PropertyController {
     @Autowired
     PropertyService propertyService;
 
+
     @GetMapping(ALL_PATH)
     public List<PropertyTO> getAll() {
         return propertyService.findAll();
@@ -50,7 +51,6 @@ public class PropertyController {
     public List<PropertyTO> getByName(@PathVariable String name) {
         return propertyService.findByName(name);
     }
-
 
     // SORT
     @GetMapping(ASCENDING_PRICE_PATH)
@@ -97,5 +97,7 @@ public class PropertyController {
         String profileImageStoragePlace = env.getProperty("location");
         return imageService.read(profileImageStoragePlace + imageNameOpt.get());
     }
+
+    @PostMapping
 
 }

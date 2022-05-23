@@ -39,9 +39,9 @@ public class Property {
     @Column
     private String description;
 
-    @Column
+    @Column (nullable = false)
     private String picture;
 
-    public Property (){};
+    public Property(){};
 
 }

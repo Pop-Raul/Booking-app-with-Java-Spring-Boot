@@ -17,9 +17,6 @@ public interface PropertyRepository extends CrudRepository<Property, Long> {
     @Query("SELECT u FROM Property u WHERE u.name LIKE %:token%")
     List<Property> findByName(@Param("token") String token);
 
-//    @Query("Select u FROM Property u WHERE u.price < ")
-//    List<Property>
-
     Optional<Property> findById(Long id);
 
     @Query("select p from Property p WHERE p.price >= :minPrice  AND p.price <= :maxPrice order by p.price")
@@ -31,7 +28,7 @@ public interface PropertyRepository extends CrudRepository<Property, Long> {
     @Query("select p from Property p WHERE p.mp2 >= :minArea  AND p.mp2 <= :maxArea")
     List<Property> findByArea(int minArea, int maxArea);
 
-   @Query("SELECT p.picture FROM Property p WHERE p.id = :id")
+    @Query("SELECT p.picture FROM Property p WHERE p.id = :id")
     Optional<String> findPropertyPictureById(@Param("id") Long id);
 
 }

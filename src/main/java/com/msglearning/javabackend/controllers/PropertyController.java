@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +28,8 @@ public class PropertyController {
     private static final String ASCENDING_PRICE_PATH = "/price-up";
     private static final String DESCENDING_PRICE_PATH = "/price-down";
     private static final String IMAGE_PATH = "/image/{id}";
+
+    private static final String SAVE_PATH = "/save";
 
     @Autowired
     private ImageService imageService;
@@ -50,6 +54,20 @@ public class PropertyController {
     @GetMapping(NAME_PATH)
     public List<PropertyTO> getByName(@PathVariable String name) {
         return propertyService.findByName(name);
+    }
+
+    @PostMapping(SAVE_PATH)
+    public boolean saveProperty(@RequestBody PropertyTO propertyto, @RequestParam MultipartFile file)
+    {
+        try{
+            propertyService.saveProperty(propertyto);
+            imageService.store(file, Paths.get(env.getProperty("location")) , propertyto.getPicture());
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+        return false;
     }
 
     // SORT
@@ -98,6 +116,5 @@ public class PropertyController {
         return imageService.read(profileImageStoragePlace + imageNameOpt.get());
     }
 
-    @PostMapping
 
 }

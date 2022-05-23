@@ -31,6 +31,8 @@ public class PropertyController {
 
     private static final String SAVE_PATH = "/save";
 
+    private static final String STORE_IMAGE_PATH="/store";
+
     @Autowired
     private ImageService imageService;
 
@@ -57,17 +59,30 @@ public class PropertyController {
     }
 
     @PostMapping(SAVE_PATH)
-    public boolean saveProperty(@RequestBody PropertyTO propertyto, @RequestParam MultipartFile file)
+    public boolean saveProperty(@RequestBody PropertyTO propertyto)
     {
         try{
             propertyService.saveProperty(propertyto);
-            imageService.store(file, Paths.get(env.getProperty("location")) , propertyto.getPicture());
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    @PostMapping(STORE_IMAGE_PATH)
+    public boolean storeImage(@RequestParam("image") MultipartFile file, @RequestParam("name") String name)
+    {
+        try{
+            imageService.store(file, Paths.get(env.getProperty("location")) , name);
         }
         catch (Exception e)
         {
             return false;
         }
-        return false;
+        return true;
     }
 
     // SORT

@@ -1,5 +1,6 @@
 package com.msglearning.javabackend.services;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.msglearning.javabackend.converters.PropertyConverter;
 import com.msglearning.javabackend.entity.Property;
 import com.msglearning.javabackend.helpers.StringHelper;
@@ -52,7 +53,6 @@ public class PropertyService {
             return null;
         }
 
-        if(imageService.store('location',,propertyTO.getPicture()))
 
         return propertyRepository.save(PropertyConverter.convertToProperty(propertyTO));
     }

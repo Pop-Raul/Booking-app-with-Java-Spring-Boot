@@ -17,6 +17,7 @@ public class BookingController {
     private static final String ALL_PATH = "/all" ;
     private static final String ID_PATH = "/id/{id}" ;
     private static final String NAME_PATH = "/name/{name}";
+    private static final String SAVE_BOOKING_PATH = "/save";
 
 
 
@@ -33,4 +34,13 @@ public class BookingController {
         return bookingService.findById(id);
     }
 
+    @PostMapping(SAVE_BOOKING_PATH)
+    public boolean saveBooking (@RequestBody BookingTO bookingTO) {
+        try {
+            bookingService.save(bookingTO);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 }

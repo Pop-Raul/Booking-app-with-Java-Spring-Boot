@@ -66,35 +66,24 @@ public class UserService {
 
         //validate Phone
         if (!validatePhone(userTO.getPhone())) {
-            System.out.println("Not a valid phone number");
-            return null;
+            throw new Exception("Not a valid phone number!");
         }
-
         //validate email
         if (!validateEmail(userTO.getEmail())) {
-            System.out.println("Not a valid email");
-            return null;
+            throw new Exception("Not a valid email!");
         }
-
         //check firstname NotNull or empty
         if (isNullOrBlank(userTO.getFirstName())) {
-            System.out.println("Invalid first name!");
-            return null;
+            throw new Exception("First name can not be empty!");
         }
-
         //check lastName NotNull or empty
         if (isNullOrBlank(userTO.getLastName())) {
-            System.out.println("Invalid last name!");
-            return null;
+            throw new Exception("Last name can not be empty!");
         }
-
         if (isNullOrBlank(userTO.getPassword())) {
-            System.out.println("Password is empty!");
-            return null;
+            throw new Exception("Password can not be empty!");
         }
-
         userTO.setPassword(PasswordService.getSaltedHash(userTO.getPassword()));
-
         return userRepository.save(UserConverter.convertToUser(userTO));
     }
 

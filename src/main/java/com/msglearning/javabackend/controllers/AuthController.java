@@ -34,11 +34,11 @@ public class AuthController {
         //User user = UserConverter.convertToUser(userTO);
         try {
             userService.save(userTO);
+            return true;
         } catch (Exception e) {
             return false;
         }
 
-        return true;
     }
 
     @PostMapping(LOGIN_PATH)

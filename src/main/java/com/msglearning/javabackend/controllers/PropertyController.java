@@ -21,13 +21,14 @@ public class PropertyController {
 
     private static final String ALL_PATH = "/all";
     private static final String ID_PATH = "/id/{id}";
-    private static final String NAME_PATH = "/name/{name}";
+    private static final String NAME_PATH = "/name";
     private static final String PRICE_RANGE_PATH = "/price";
     private static final String AREA_RANGE_PATH = "/area";
-    private static final String ROOM_PATH = "/room/{room}";
+    private static final String ROOM_PATH = "/room";
     private static final String ASCENDING_PRICE_PATH = "/price-up";
     private static final String DESCENDING_PRICE_PATH = "/price-down";
     private static final String IMAGE_PATH = "/image/{id}";
+    private static final String FILTER_PATH = "/filter";
 
     private static final String SAVE_PATH = "/save";
 
@@ -54,8 +55,8 @@ public class PropertyController {
     }
 
     @GetMapping(NAME_PATH)
-    public List<PropertyTO> getByName(@PathVariable String name) {
-        return propertyService.findByName(name);
+    public List<PropertyTO> getByName(@RequestParam String name) {
+        return propertyService.findByName(name) ;
     }
 
     @PostMapping(SAVE_PATH)
@@ -104,18 +105,18 @@ public class PropertyController {
     // FILTER
     @GetMapping(PRICE_RANGE_PATH)
     public List<PropertyTO> getByPriceRange(@RequestParam double minPrice, @RequestParam double maxPrice) {
-        //http://localhost:8080/java-api/api/booking/price?minPrice=54&maxPrice=345
+        //http://localhost:8080/java-api/api/property/price?minPrice=54&maxPrice=345
         return propertyService.getByPriceRange(minPrice,maxPrice);
     }
 
     @GetMapping(ROOM_PATH)
-    public List<PropertyTO> findByNrOfRooms(@PathVariable int room) {
+    public List<PropertyTO> findByNrOfRooms(@RequestParam int room) {
         //http://localhost:8080/java-api/api/booking/room/2
         return propertyService.findByNrOfRooms(room);
     }
 
     @GetMapping(AREA_RANGE_PATH)
-    public List<PropertyTO> findByArea(@RequestParam int minArea, @RequestParam int maxArea) {
+    public List<PropertyTO> findByArea(@RequestParam (required = false) int minArea, @RequestParam int maxArea) {
         //http://localhost:8080/java-api/api/booking/area?minArea=1&maxArea=4
         return propertyService.findByArea(minArea,maxArea);
     }
@@ -130,6 +131,14 @@ public class PropertyController {
         String profileImageStoragePlace = env.getProperty("location");
         return imageService.read(profileImageStoragePlace + imageNameOpt.get());
     }
-
+    @GetMapping(FILTER_PATH)
+    public List<PropertyTO> getFilteredProperties(@RequestParam (required = false) String token,
+                                                  @RequestParam (required = false) Double minPrice,
+                                                  @RequestParam (required = false) Double maxPrice,
+                                                  @RequestParam (required = false) Integer room,
+                                                  @RequestParam (required = false) Integer minArea,
+                                                  @RequestParam (required = false) Integer maxArea){
+        return propertyService.getFilteredProperties(token,minPrice,maxPrice,room,minArea,maxArea);
+    }
 
 }

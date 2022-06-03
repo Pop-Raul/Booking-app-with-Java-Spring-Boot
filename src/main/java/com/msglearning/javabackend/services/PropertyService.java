@@ -63,11 +63,11 @@ public class PropertyService {
         List<Property> filteredProperties = new ArrayList<>();
         for (Property p : propertyRepository.findAll()) {
                                 if ((!StringUtils.hasText(token) || p.getName().equals(token)) &&
-                                    (minPrice == null || p.getPrice() > minPrice) &&
-                                    (maxPrice == null  || p.getPrice() < maxPrice) &&
+                                    (minPrice == null || p.getPrice() >= minPrice) &&
+                                    (maxPrice == null  || p.getPrice() <= maxPrice) &&
                                     (room == null || p.getRoom() == room) &&
-                                    (minArea == null || p.getMp2() > minArea) &&
-                                    (maxArea == null || p.getMp2() < maxArea)) {
+                                    (minArea == null || p.getMp2() >= minArea) &&
+                                    (maxArea == null || p.getMp2() <= maxArea)) {
 
                 filteredProperties.add(p);
             }
